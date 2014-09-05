@@ -1,5 +1,5 @@
 //! annyang
-//! version : 1.3.0
+//! version : 1.4.0
 //! author  : Tal Ater @TalAter
 //! license : MIT
 //! https://www.TalAter.com/annyang/
@@ -118,7 +118,11 @@
 
       // Set the max number of alternative transcripts to try and match with a command
       recognition.maxAlternatives = 5;
-      recognition.continuous = true;
+
+      // In HTTPS, turn off continuous mode for faster results.
+      // In HTTP,  turn on  continuous mode for much slower results, but no repeating security notices
+      recognition.continuous = root.location.protocol === 'http:';
+
       // Sets the language to the default 'en-US'. This can be changed with annyang.setLanguage()
       recognition.lang = 'en-US';
 
@@ -505,4 +509,24 @@
  * * Swedish `sv-SE`
  * * Turkish `tr`
  * * Zulu `zu`
+ *
+ * ## Developing
+ *
+ * Prerequisities: node.js
+ *
+ * First, install dependencies in your local annyang copy:
+ *
+ *     npm install
+ *
+ * Make sure to run the default grunt task after each change to annyang.js. This can also be done automatically by running:
+ *
+ *     grunt watch
+ *
+ * You can also run a local server for testing your work with:
+ *
+ *     grunt dev
+ *
+ * Point your browser to `https://localhost:8443/demo/` to see the demo page.
+ * Since it's using self-signed certificate, you might need to click *"Proceed Anyway"*.
+ *
  */
